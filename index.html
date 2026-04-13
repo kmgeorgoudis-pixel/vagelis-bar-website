@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagelis Bar | Welcome</title>
+    <link rel="icon" type="image/png" href="images/favico.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <meta name="keywords" content="Vagelis Bar, Kokkari Samos, cocktails Samos, bar Kokkari, Σάμος Κοκκάρι, μπαρ Σάμος, νυχτερινή ζωή Σάμος, Vagelis Bar Samos">
+    <meta name="author" content="Konstantinos Georgoudis">
+    
+    <style>
+        :root {
+            --primary: #002b5b;
+            --accent: #f39c12;
+            --text: #ffffff;
+            --glass: rgba(255, 255, 255, 0.1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #001f3f, #004d7a);
+            color: var(--text);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Navbar Style */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0; width: 90%; z-index: 1000;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 2px; }
+        .nav-links a { color: white; text-decoration: none; margin: 0 15px; font-weight: 500; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
+
+        /* Hero Section */
+        .hero {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            text-align: center;
+            padding: 140px 10% 80px;
+        }
+
+        h1 { font-size: 3.5rem; margin-bottom: 20px; color: var(--accent); }
+        p { max-width: 700px; line-height: 1.6; font-size: 1.2rem; margin-bottom: 30px; }
+
+        /* Button Style */
+        .cta-btn {
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 2px solid transparent;
+            display: inline-block;
+            margin-top: 20px;
+            z-index: 10;
+        }
+
+        .cta-btn:hover { background: transparent; border-color: var(--accent); transform: scale(1.05); }
+
+        
+        .wheel-container {
+            margin: 80px 0;
+            width: 200px;
+            height: 250px;
+            position: relative;
+            perspective: 1000px;
+        }
+
+        .wheel {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            transform-style: preserve-3d;
+            animation: rotateWheel 25s linear infinite;
+        }
+
+        .wheel:hover { animation-play-state: paused; }
+        .item { position: absolute; width: 180px; height: 230px; border: 3px solid white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .item img { width: 100%; height: 100%; object-fit: cover; }
+
+        @keyframes rotateWheel {
+            from { transform: rotateY(0deg); }
+            to { transform: rotateY(360deg); }
+        }
+
+        /* Laundry Banner */
+        #laundry-banner {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 320px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            border-left: 5px solid #0056b3;
+            animation: slideIn 1s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(-110%); }
+            to { transform: translateX(0); }
+        }
+
+        .banner-header { display: flex; justify-content: space-between; align-items: flex-start; }
+        .banner-logo { width: 80px; height: auto; }
+        .close-banner { background: none; border: none; font-size: 20px; cursor: pointer; color: #888; }
+        .banner-content h4 { margin: 0; color: #0056b3; font-size: 1rem; }
+        .banner-content p { font-size: 0.85rem; line-height: 1.4; color: #555; margin: 5px 0; }
+        .banner-link { color: #0056b3; font-weight: bold; text-decoration: none; font-size: 0.85rem; }
+
+        /* Footer */
+        footer { padding: 20px; text-align: center; background: rgba(0,0,0,0.2); font-size: 0.9rem; color: rgba(255,255,255,0.7); }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .wheel-container { transform: scale(0.65); margin: 20px 0; }
+            #laundry-banner { width: 280px; left: 10px; bottom: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VAGELIS BAR</div>
+        <div class="nav-links">
+            <a href="index.html" class="active" id="nav-home">Αρχική</a>
+            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
+            <a href="history.html" id="nav-history">Ιστορία</a>
+            <a href="contact.html" id="nav-contact">Επικοινωνία</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="changeLang('el')">GR</button> | 
+            <button class="lang-btn" onclick="changeLang('en')">EN</button>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 data-aos="fade-down" id="main-title">Καλώς ήρθατε στο Vagelis Bar</h1>
+        <p data-aos="fade-up" id="main-desc">
+            Απολαύστε την απόλυτη καλοκαιρινή εμπειρία στο Κοκκάρι της Σάμου. 
+            Από νωρίς το πρωί με <b>εξαιρετικό καφέ</b> και <b>πλούσιο πρωινό</b>, 
+            μέχρι αργά το βράδυ με <b>δροσερά cocktails</b> και <b>ποιοτικά ποτά</b>. 
+            Η μοναδική θέα και η αυθεντική φιλοξενία μας σας περιμένουν!
+        </p>
+
+        <a href="contact.html" class="cta-btn" data-aos="zoom-in" id="cta-text">Επικοινωνήστε μαζί μας</a>
+
+        <div class="wheel-container">
+            <div class="wheel">
+                <div class="item" style="transform: rotateY(0deg) translateZ(320px);"><img src="images/3.png" alt="Vagelis Bar 1"></div>
+                <div class="item" style="transform: rotateY(60deg) translateZ(320px);"><img src="images/7.png" alt="Vagelis Bar 2"></div>
+                <div class="item" style="transform: rotateY(120deg) translateZ(320px);"><img src="images/11.png" alt="Vagelis Bar 3"></div>
+                <div class="item" style="transform: rotateY(180deg) translateZ(320px);"><img src="images/20.png" alt="Vagelis Bar 4"></div>
+                <div class="item" style="transform: rotateY(240deg) translateZ(320px);"><img src="images/27.png" alt="Vagelis Bar 5"></div>
+                <div class="item" style="transform: rotateY(300deg) translateZ(320px);"><img src="images/28.png" alt="Vagelis Bar 6"></div>
+            </div>
+        </div>
+    </section>
+
+    <div id="laundry-banner">
+        <div class="banner-header">
+            <img src="images/ariston.png" class="banner-logo" alt="Ariston Logo">
+            <button class="close-banner" onclick="document.getElementById('laundry-banner').style.display='none'">×</button>
+        </div>
+        <div class="banner-content">
+            <h4 id="banner-title">ARISTON Wash & Dry</h4>
+            <p id="banner-text">Το κορυφαίο self-service laundry στη Σάμο (Βαθύ, Δερβανακίων 10). Πλυντήρια & στεγνωτήρια για πεντακάθαρα ρούχα! Απολαύστε τον καφέ ή το σνακ σας στους αυτόματους πωλητές μας όσο περιμένετε.</p>
+            <a href="https://www.aristonwashdry.gr" target="_blank" class="banner-link">www.aristonwashdry.gr</a>
+        </div>
+    </div>
+
+    <footer>
+        Website designed and developed with ❤️ by <b>Konstantinos Georgoudis</b><br>
+        <a href="privacy.html" style="color: #777; text-decoration: none; font-size: 0.8rem; margin-top: 10px; display: inline-block;">Πολιτική Απορρήτου/ Privacy Policy</a>
+    </footer>
+    <div id="cookie-banner" style="position: fixed; bottom: 0; width: 100%; background: rgba(0,0,0,0.9); color: white; padding: 15px; text-align: center; z-index: 9999; display: none; font-size: 14px; border-top: 2px solid var(--accent);">
+    Χρησιμοποιούμε cookies για να σας εξασφαλίσουμε την καλύτερη εμπειρία στον ιστότοπό μας./ We use cookies to ensure you get the best experience on our website. 
+    <button onclick="acceptCookies()" style="background: var(--accent); border: none; color: white; padding: 5px 15px; margin-left: 15px; border-radius: 5px; cursor: pointer; font-weight: bold;">Αποδοχή</button>
+</div>
+
+<script>
+   
+    window.onload = function() {
+        if (!localStorage.getItem('cookiesAccepted')) {
+            document.getElementById('cookie-banner').style.display = 'block';
+        }
+    }
+
+    function acceptCookies() {
+        localStorage.setItem('cookiesAccepted', 'true');
+        document.getElementById('cookie-banner').style.display = 'none';
+    }
+</script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200, once: true });
+
+        function changeLang(lang) {
+            const elements = {
+                title: document.getElementById('main-title'),
+                desc: document.getElementById('main-desc'),
+                cta: document.getElementById('cta-text'),
+                home: document.getElementById('nav-home'),
+                photos: document.getElementById('nav-photos'),
+                history: document.getElementById('nav-history'),
+                contact: document.getElementById('nav-contact'),
+                bTitle: document.getElementById('banner-title'),
+                bText: document.getElementById('banner-text')
+            };
+
+            if(lang === 'en') {
+                elements.title.innerText = "Welcome to Vagelis Bar";
+                elements.desc.innerHTML = "Experience the ultimate summer vibe in Kokkari, Samos. From early morning with <b>excellent coffee</b> and <b>delicious breakfast</b>, to late at night with <b>refreshing cocktails</b> and <b>premium drinks</b>.";
+                elements.cta.innerText = "Get in touch";
+                elements.home.innerText = "Home";
+                elements.photos.innerText = "Photos";
+                elements.history.innerText = "History";
+                elements.contact.innerText = "Contact";
+                elements.bTitle.innerText = "ARISTON Wash & Dry";
+                elements.bText.innerText = "The best self-service laundry in Samos Town. High-end washers & dryers. Enjoy a coffee or snack from our vending machines while you wait!";
+            } else {
+                elements.title.innerText = "Καλώς ήρθατε στο Vagelis Bar";
+                elements.desc.innerHTML = "Απολαύστε την απόλυτη καλοκαιρινή εμπειρία στο Κοκκάρι της Σάμου. Από νωρίς το πρωί με <b>εξαιρετικό καφέ</b> και <b>πλούσιο πρωινό</b>, μέχρι αργά το βράδυ με <b>δροσερά cocktails</b> και <b>ποιοτικά ποτά</b>.";
+                elements.cta.innerText = "Επικοινωνήστε μαζί μας";
+                elements.home.innerText = "Αρχική";
+                elements.photos.innerText = "Φωτογραφίες";
+                elements.history.innerText = "Ιστορία";
+                elements.contact.innerText = "Επικοινωνία";
+                elements.bTitle.innerText = "ARISTON Wash & Dry";
+                elements.bText.innerText = "Το κορυφαίο self-service laundry στη Σάμο (Βαθύ, Δερβανακίων 10). Πλυντήρια & στεγνωτήρια για πεντακάθαρα ρούχα! Απολαύστε τον καφέ ή το σνακ σας στους αυτόματους πωλητές μας.";
+            }
+        }
+    </script>
+</body>
+</html>

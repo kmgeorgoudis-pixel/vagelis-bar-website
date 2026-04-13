@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagelis Bar | Privacy Policy</title>
+    <link rel="icon" type="image/png" href="images/favico.png">
+    
+    <style>
+        :root {
+            --primary: #002b5b;
+            --accent: #f39c12;
+            --text: #ffffff;
+            --bg: #050a14;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0; width: 90%; z-index: 1000;
+        }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
+        nav a:hover { color: var(--accent); }
+        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
+
+        .content-container {
+            max-width: 900px;
+            margin: 150px auto 50px;
+            padding: 0 20px;
+        }
+
+        h1 { color: var(--accent); border-bottom: 2px solid var(--accent); padding-bottom: 10px; }
+        h2 { color: var(--accent); margin-top: 30px; }
+        p { color: #ccc; }
+        ul { color: #ccc; }
+        li { margin-bottom: 10px; }
+
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            color: #777;
+            font-size: 0.9rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VAGELIS BAR</div>
+        <div class="nav-links">
+            <a href="index.html" id="nav-home">Αρχική</a>
+            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
+            <a href="history.html" id="nav-history">Ιστορία</a>
+            <a href="contact.html" id="nav-contact">Επικοινωνία</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+    </nav>
+
+    <div class="content-container" id="privacy-content">
+        </div>
+
+    <footer>
+        Website designed and developed with ❤️ by <b>Konstantinos Georgoudis</b>
+    </footer>
+
+    <script>
+        const langData = {
+            el: {
+                navHome: "Αρχική", navPhotos: "Φωτογραφίες", navHistory: "Ιστορία", navContact: "Επικοινωνία",
+                title: "Πολιτική Απορρήτου",
+                intro: "Η παρούσα Πολιτική Απορρήτου επεξηγεί πώς το <b>Vagelis Bar</b> συλλέγει, χρησιμοποιεί και προστατεύει τα προσωπικά σας δεδομένα κατά την επίσκεψή σας στην ιστοσελίδα μας.",
+                h1: "1. Συλλογή Δεδομένων",
+                p1: "Συλλέγουμε μόνο τα δεδομένα που εσείς μας παρέχετε οικειοθελώς μέσω της φόρμας επικοινωνίας:",
+                list1: "<li>Ονοματεπώνυμο</li><li>Διεύθυνση Email</li><li>Θέμα και κείμενο μηνύματος</li>",
+                h2: "2. Χρήση των Πληροφοριών",
+                p2: "Τα στοιχεία σας χρησιμοποιούνται αποκλειστικά για την απάντηση στα ερωτήματά σας και την παροχή πληροφοριών σχετικά με τις υπηρεσίες μας. Δεν μοιραζόμαστε τα δεδομένα σας με τρίτους για σκοπούς marketing.",
+                h3: "3. Υπηρεσίες Τρίτων",
+                p3: "Χρησιμοποιούμε το <b>FormSubmit</b> για την αποστολή email και το <b>Google Maps</b> για την εμφάνιση της τοποθεσίας μας.",
+                h4: "4. Cookies",
+                p4: "Χρησιμοποιούμε απλά cookies για να θυμόμαστε τις προτιμήσεις σας (π.χ. αν κλείσατε το banner ενημέρωσης).",
+                h5: "5. Τα Δικαιώματά σας",
+                p5: "Έχετε το δικαίωμα να ζητήσετε πρόσβαση ή διαγραφή των στοιχείων σας στο <b>contactvagbar@gmail.com</b>."
+            },
+            en: {
+                navHome: "Home", navPhotos: "Photos", navHistory: "History", navContact: "Contact",
+                title: "Privacy Policy",
+                intro: "This Privacy Policy explains how <b>Vagelis Bar</b> collects, uses, and protects your personal data when you visit our website.",
+                h1: "1. Data Collection",
+                p1: "We only collect data that you voluntarily provide via the contact form:",
+                list1: "<li>Full Name</li><li>Email Address</li><li>Subject and message text</li>",
+                h2: "2. Use of Information",
+                p2: "Your details are used exclusively to respond to your inquiries and provide information about our services. We do not share your data with third parties for marketing purposes.",
+                h3: "3. Third Party Services",
+                p3: "We use <b>FormSubmit</b> for email processing and <b>Google Maps</b> to display our location.",
+                h4: "4. Cookies",
+                p4: "We use simple cookies to remember your preferences (e.g., if you closed the notification banner).",
+                h5: "5. Your Rights",
+                p5: "You have the right to request access to or deletion of your data at <b>contactvagbar@gmail.com</b>."
+            }
+        };
+
+        function setLang(lang) {
+            // Navbar
+            document.getElementById('nav-home').innerText = langData[lang].navHome;
+            document.getElementById('nav-photos').innerText = langData[lang].navPhotos;
+            document.getElementById('nav-history').innerText = langData[lang].navHistory;
+            document.getElementById('nav-contact').innerText = langData[lang].navContact;
+
+            // Main Content
+            const container = document.getElementById('privacy-content');
+            container.innerHTML = `
+                <h1>${langData[lang].title}</h1>
+                <p>${langData[lang].intro}</p>
+                <h2>${langData[lang].h1}</h2>
+                <p>${langData[lang].p1}</p>
+                <ul>${langData[lang].list1}</ul>
+                <h2>${langData[lang].h2}</h2>
+                <p>${langData[lang].p2}</p>
+                <h2>${langData[lang].h3}</h2>
+                <p>${langData[lang].p3}</p>
+                <h2>${langData[lang].h4}</h2>
+                <p>${langData[lang].p4}</p>
+                <h2>${langData[lang].h5}</h2>
+                <p>${langData[lang].p5}</p>
+            `;
+        }
+
+        
+        setLang('el');
+    </script>
+</body>
+</html>

@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vagelis Bar | Επικοινωνία</title>
+    <link rel="icon" type="image/png" href="images/favico.png">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #002b5b;
+            --accent: #f39c12;
+            --text: #ffffff;
+            --bg: #050a14;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0; width: 90%; z-index: 1000;
+        }
+        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
+        nav a:hover, nav a.active { color: var(--accent); }
+        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            padding: 150px 10% 50px;
+        }
+
+        /* Form Style */
+        .contact-form {
+            background: rgba(255,255,255,0.05);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(243, 156, 18, 0.2);
+            backdrop-filter: blur(5px);
+            position: relative;
+        }
+
+        .contact-form h3 {
+            color: var(--accent);
+            margin-top: 0;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+            padding-left: 15px;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid #444;
+            color: white;
+            border-radius: 8px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .submit-btn {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4); }
+
+        /* Info Style */
+        .info-box h2 { color: var(--accent); font-size: 3rem; margin-top: 0; }
+        .info-item { margin-bottom: 25px; }
+        .info-item h4 { margin: 0; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+        .info-item p, .info-item a { font-size: 1.2rem; color: #ccc; text-decoration: none; transition: 0.3s; }
+        .info-item a:hover { color: var(--accent); }
+
+        /* Map Style */
+        .map-wrapper {
+            margin-top: 30px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(243, 156, 18, 0.3);
+        }
+
+        /* Reviews Section */
+        .reviews {
+            padding: 80px 10%;
+            text-align: center;
+            background: rgba(255,255,255,0.02);
+        }
+
+        .review-cards {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+
+        .review-card {
+            background: rgba(255,255,255,0.05);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 320px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+        .review-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); }
+
+        .stars { color: #f1c40f; margin-bottom: 10px; }
+
+        .google-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: bold;
+            padding: 10px 20px;
+            border: 1px solid var(--accent);
+            border-radius: 25px;
+            transition: 0.3s;
+        }
+        .google-link:hover { background: var(--accent); color: white; }
+
+        /* Footer */
+        footer {
+            padding: 40px;
+            text-align: center;
+            background: #000;
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .contact-container { grid-template-columns: 1fr; padding-top: 120px; }
+            .info-box h2 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">VAGELIS BAR</div>
+        <div class="nav-links">
+            <a href="index.html" id="nav-home">Αρχική</a>
+            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
+            <a href="history.html" id="nav-history">Ιστορία</a>
+            <a href="contact.html" class="active" id="nav-contact">Επικοινωνία</a>
+        </div>
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+    </nav>
+
+    <div class="contact-container">
+        <div class="info-box" data-aos="fade-right">
+            <h2 id="contact-title">Πείτε μας ένα Γεια</h2>
+            <div class="info-item">
+                <h4 id="info-addr">Τοποθεσία</h4>
+                <p>Πλατεία Κοκκάρι, Σάμος, Ελλάδα</p>
+            </div>
+            <div class="info-item">
+                <h4 id="info-phone">Τηλέφωνο</h4>
+                <p><a href="tel:2273092344">22730 92344</a></p>
+            </div>
+            <div class="info-item">
+                <h4 id="info-email">Email</h4>
+                <p><a href="mailto:contactvagbar@gmail.com">contactvagbar@gmail.com</a></p>
+            </div>
+            <div class="info-item">
+                <h4 id="info-hours">Ωράριο</h4>
+                <p id="hours-text">Καθημερινά: 09:00 π.μ. – 02:00 π.μ.</p>
+            </div>
+
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2414.3815763167418!2d26.890614274746532!3d37.77883677198433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bc1678c4bae449%3A0x8ff7e419ee59bee0!2sVagelis%20Bar!5e1!3m2!1sel!2sgr!4v1776116927244!5m2!1sel!2sgr" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+
+        <div class="contact-form" data-aos="fade-left">
+            <h3 id="form-header">Φόρμα Επικοινωνίας</h3>
+            <form action="https://formsubmit.co/contactvagbar@gmail.com" method="POST">
+                <input type="text" name="_honey" style="display:none">
+                <input type="hidden" name="_captcha" value="false">
+                
+                <input type="text" name="name" id="form-name" placeholder="Το Όνομά σας" required>
+                <input type="email" name="email" id="form-email" placeholder="Το Email σας" required>
+                <input type="text" name="subject" id="form-subject" placeholder="Θέμα">
+                <textarea name="message" id="form-msg" rows="5" placeholder="Το Μήνυμά σας" required></textarea>
+                <div style="display: flex; align-items: flex-start; gap: 10px; margin: 15px 0; text-align: left;">
+                    <input type="checkbox" id="privacy-check" required style="width: auto; margin-top: 5px;">
+                    <label for="privacy-check" style="font-size: 0.85rem; color: #ccc;">
+                        Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων (όνομα, email) για την επικοινωνία με το Vagelis Bar./ I agree to the processing of my personal data (name, email) for the purpose of communicating with Vagelis Bar.
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn" id="form-btn">Αποστολή Μηνύματος</button>
+            </form>
+        </div>
+    </div>
+
+    <section class="reviews">
+        <h2 id="reviews-title" data-aos="fade-up">Τι λένε οι επισκέπτες μας</h2>
+        <div class="review-cards">
+            <div class="review-card" data-aos="zoom-in">
+                <div class="stars">★★★★★</div>
+                <p>"Το καλύτερο σημείο στο Κοκκάρι! Τα cocktails είναι έργα τέχνης και η θέα στην πλατεία δεν περιγράφεται με λόγια."</p>
+                <strong>- Marco S.</strong>
+            </div>
+            <div class="review-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="stars">★★★★★</div>
+                <p>"Αυθεντική φιλοξενία. Ο Βαγγέλης και το προσωπικό σε κάνουν να νιώθεις σαν το σπίτι σου!"</p>
+                <strong>- Ελένη Κ.</strong>
+            </div>
+        </div>
+        <a href="https://share.google/jNQHpx3AU3JJ70Ujx" target="_blank" class="google-link" id="google-btn">Δείτε όλες τις κριτικές στο Google</a>
+    </section>
+
+    <footer>
+        Website designed and developed with ❤️ by <b>Konstantinos Georgoudis</b>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+
+        const langData = {
+            el: {
+                navHome: "Αρχική", navPhotos: "Φωτογραφίες", navHistory: "Ιστορία", navContact: "Επικοινωνία",
+                title: "Πείτε μας ένα Γεια",
+                addr: "Τοποθεσία",
+                addrFull: "Πλατεία Κοκκάρι, Σάμος, Ελλάδα",
+                phone: "Τηλέφωνο",
+                email: "Email",
+                hours: "Ωράριο",
+                hoursText: "Καθημερινά: 09:00 π.μ. – 02:00 π.μ.",
+                fHeader: "Φόρμα Επικοινωνίας",
+                fName: "Το Όνομά σας",
+                fEmail: "Το Email σας",
+                fSub: "Θέμα",
+                fMsg: "Το Μήνυμά σας",
+                fBtn: "Αποστολή Μηνύματος",
+                revTitle: "Τι λένε οι επισκέπτες μας",
+                gBtn: "Δείτε όλες τις κριτικές στο Google",
+                reviews: [
+                    "\"Το καλύτερο σημείο στο Κοκκάρι! Τα cocktails είναι έργα τέχνης και η θέα στην πλατεία δεν περιγράφεται με λόγια.\"",
+                    "\"Αυθεντική φιλοξενία. Ο Βαγγέλης και το προσωπικό σε κάνουν να νιώθεις σαν το σπίτι σου!\""
+                ]
+            },
+            en: {
+                navHome: "Home", navPhotos: "Photos", navHistory: "History", navContact: "Contact",
+                title: "Say Hello",
+                addr: "Location",
+                addrFull: "Kokkari Square, Samos, Greece",
+                phone: "Phone",
+                email: "Email",
+                hours: "Opening Hours",
+                hoursText: "Everyday: 09:00 AM – 02:00 AM",
+                fHeader: "Contact Form",
+                fName: "Your Name",
+                fEmail: "Your Email",
+                fSub: "Subject",
+                fMsg: "Your Message",
+                fBtn: "Send Message",
+                revTitle: "What our guests say",
+                gBtn: "View all reviews on Google",
+                reviews: [
+                    "\"The best spot in Kokkari! The cocktails are works of art and the square view is beyond words.\"",
+                    "\"Authentic hospitality. Vagelis and the staff make you feel right at home !\""
+                ]
+            }
+        };
+
+        function setLang(lang) {
+            // Navbar
+            document.getElementById('nav-home').innerText = langData[lang].navHome;
+            document.getElementById('nav-photos').innerText = langData[lang].navPhotos;
+            document.getElementById('nav-history').innerText = langData[lang].navHistory;
+            document.getElementById('nav-contact').innerText = langData[lang].navContact;
+
+            // Content
+            document.getElementById('contact-title').innerText = langData[lang].title;
+            document.getElementById('info-addr').innerText = langData[lang].addr;
+            document.querySelector('.info-item p').innerText = langData[lang].addrFull;
+            document.getElementById('info-phone').innerText = langData[lang].phone;
+            document.getElementById('info-email').innerText = langData[lang].email;
+            document.getElementById('info-hours').innerText = langData[lang].hours;
+            document.getElementById('hours-text').innerText = langData[lang].hoursText;
+            
+            // Form
+            document.getElementById('form-header').innerText = langData[lang].fHeader;
+            document.getElementById('form-name').placeholder = langData[lang].fName;
+            document.getElementById('form-email').placeholder = langData[lang].fEmail;
+            document.getElementById('form-subject').placeholder = langData[lang].fSub;
+            document.getElementById('form-msg').placeholder = langData[lang].fMsg;
+            document.getElementById('form-btn').innerText = langData[lang].fBtn;
+            
+            // Reviews
+            document.getElementById('reviews-title').innerText = langData[lang].revTitle;
+            document.getElementById('google-btn').innerText = langData[lang].gBtn;
+            
+            const reviewTexts = document.querySelectorAll('.review-card p');
+            langData[lang].reviews.forEach((text, i) => reviewTexts[i].innerText = text);
+        }
+    </script>
+</body>
+</html>
