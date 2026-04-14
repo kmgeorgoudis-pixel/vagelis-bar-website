@@ -6,180 +6,218 @@
     <title>Vagelis Bar | Gallery</title>
     <link rel="icon" type="image/png" href="images/favico.png?v=1">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #002b5b;
-            --accent: #f39c12;
-            --text: #ffffff;
-            --bg-dark: #000c18;
+            --primary: #001a33;
+            --accent: #7b7674;
+            --accent-glow: rgba(230, 126, 34, 0.4);
+            --text: #f8f9fa;
+            --bg-dark: #000b1a;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--bg-dark);
+            background: radial-gradient(circle at center, #002b5b, #000b1a);
             color: var(--text);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Navbar */
+        /* --- Navigation --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background: rgba(0,0,0,0.8);
+            padding: 20px 8%;
+            background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             position: fixed;
-            top: 0; width: 90%; z-index: 2000;
+            top: 0; width: 100%; z-index: 2000;
+            border-bottom: 1px solid var(--glass-border);
         }
 
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--accent); }
-        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
-        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
+        .logo { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
 
-        /* Hero Banner Section */
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-weight: 400; 
+            font-size: 0.95rem;
+            transition: 0.4s; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--accent); transition: 0.4s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .lang-switch { 
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 6px 15px; 
+            border-radius: 30px; 
+        }
+
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+
+        /* --- Hero Section --- */
         .gallery-hero {
-            height: 50vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/1.png');
+            height: 60vh;
+            background: linear-gradient(rgba(0,11,26,0.6), rgba(0,11,26,0.9)), url('images/1.png');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
         }
 
-        .gallery-hero h1 { font-size: 4rem; text-transform: uppercase; letter-spacing: 5px; color: var(--accent); margin: 0; }
+        .gallery-hero h1 { 
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 6rem); 
+            text-transform: none; 
+            font-style: italic;
+            color: white; 
+            margin: 0; 
+            text-shadow: 2px 2px 20px rgba(0,0,0,0.5);
+        }
 
-        /* Magic Boxes Section (30 Photos loop) */
-        .section-title { text-align: center; font-size: 2.5rem; margin: 60px 0 30px; color: var(--accent); }
+        /* --- Magic Boxes Section --- */
+        .section-title { 
+            font-family: 'Playfair Display', serif;
+            text-align: center; 
+            font-size: 3rem; 
+            margin: 80px 0 40px; 
+            color: var(--accent); 
+        }
         
         .magic-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 0 10%;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            padding: 0 8%;
+            margin-bottom: 100px;
         }
 
         .magic-box {
-            height: 450px;
+            height: 500px;
             position: relative;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
-            border: 1px solid rgba(243, 156, 18, 0.2);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid var(--glass-border);
+            background: var(--primary);
         }
 
         .magic-box img {
             width: 100%; height: 100%; object-fit: cover;
-            position: absolute; opacity: 0; transition: opacity 1.5s ease-in-out;
+            position: absolute; opacity: 0; transition: opacity 1.2s ease-in-out, transform 10s ease;
         }
 
-        .magic-box img.active { opacity: 1; }
+        .magic-box img.active { opacity: 1; transform: scale(1.1); }
 
-        /* Rows Section - Best & Boss */
-        .rows-container { padding: 50px 0; }
+        /* --- Row Sections --- */
+        .rows-container { background: rgba(0,0,0,0.2); padding: 50px 0; }
 
         .row {
             display: flex;
             align-items: center;
-            padding: 60px 10%;
-            gap: 50px;
+            padding: 80px 10%;
+            gap: 60px;
         }
 
         .row:nth-child(even) { flex-direction: row-reverse; }
 
         .row-img {
             flex: 1;
-            height: 500px;
-            border-radius: 30px;
+            height: 550px;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+            border: 1px solid var(--glass-border);
         }
 
-        .row-img img { width: 100%; height: 100%; object-fit: cover; }
+        .row-img img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .row-img:hover img { transform: scale(1.05); }
 
         .row-text { flex: 1; }
-        .row-text h2 { color: var(--accent); font-size: 2.5rem; margin-bottom: 15px; }
-        .row-text p { font-size: 1.2rem; line-height: 1.8; color: #ddd; }
+        .row-text h2 { 
+            font-family: 'Playfair Display', serif;
+            color: var(--accent); 
+            font-size: 2.8rem; 
+            margin-bottom: 25px; 
+        }
+        .row-text p { font-size: 1.2rem; font-weight: 300; line-height: 1.8; color: rgba(255,255,255,0.8); }
 
-        /* Logo & CTA */
-        .bottom-section { text-align: center; padding: 80px 10%; }
-        .bottom-logo { width: 150px; margin-bottom: 30px; }
+        /* --- CTA & Footer --- */
+        .bottom-section { text-align: center; padding: 100px 10%; background: var(--bg-dark); }
         
         .cta-btn {
             display: inline-block;
             background: var(--accent);
             color: white;
             text-decoration: none;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 18px 50px;
+            border-radius: 50px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: 2px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
         }
-        .cta-btn:hover { transform: scale(1.1); box-shadow: 0 0 20px rgba(243, 156, 18, 0.4); }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px var(--accent-glow); }
 
         footer {
-            padding: 30px;
+            padding: 40px;
             text-align: center;
-            background: rgba(0,0,0,0.3);
+            background: rgba(0,0,0,0.5);
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.6);
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid var(--glass-border);
         }
 
+        /* --- Mobile Styles --- */
         @media (max-width: 768px) {
-            .gallery-hero h1 { font-size: 2.5rem; }
-            .row { flex-direction: column !important; padding: 30px 5%; }
-            .row-img { height: 300px; width: 100%; }
-        }
-        /* Hamburger Icon Style */
-        .menu-toggle {
-            display: none; 
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            transition: 0.3s;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            nav { width: 100%; padding: 15px 20px; box-sizing: border-box; }
-            
-            .menu-toggle { display: flex; order: 2; } 
-            .logo { order: 1; }
-            .lang-switch { order: 3; font-size: 0.8rem; }
-
+            nav { padding: 15px 5%; }
             .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                padding: 20px 0;
-                text-align: center;
+                display: none; flex-direction: column;
+                position: absolute; top: 70px; left: 0; width: 100%;
+                background: rgba(0, 11, 26, 0.98); padding: 30px 0;
             }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 15px 0; font-size: 1.1rem; }
+            .menu-toggle { display: flex; order: 3; flex-direction: column; gap: 5px; cursor: pointer; }
+            .bar { width: 25px; height: 2px; background: white; }
 
-            .nav-links.active {
-                display: flex; 
-            }
-
-            .nav-links a {
-                margin: 15px 0;
-                font-size: 1.2rem;
-                display: block;
-            }
+            .gallery-hero h1 { font-size: 3.5rem; }
+            .row { flex-direction: column !important; padding: 40px 8%; gap: 30px; }
+            .row-img { height: 350px; width: 100%; }
+            .row-text h2 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -188,21 +226,22 @@
     <nav>
         <div class="logo">VAGELIS BAR</div>
         
+        <div class="nav-links">
+            <a href="index.html" id="nav-home">Αρχική</a>
+            <a href="photos.html" class="active" id="nav-photos">Φωτογραφίες</a>
+            <a href="history.html" id="nav-history">Ιστορία</a>
+            <a href="contact.html" id="nav-contact">Επικοινωνία</a>
+        </div>
+
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
-        </div>
-
-        <div class="nav-links">
-            <a href="index.html" id="nav-home">Αρχική</a>
-            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
-            <a href="history.html" id="nav-history">Ιστορία</a>
-            <a href="contact.html" class="active" id="nav-contact">Επικοινωνία</a>
-        </div>
-        <div class="lang-switch">
-            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
         </div>
     </nav>
 
@@ -252,9 +291,7 @@
         </div>
     </section>
 
-    <div class="bottom-section">
-        
-        <br>
+    <div class="bottom-section" data-aos="fade-up">
         <a href="contact.html" class="cta-btn" id="cta-btn">Επικοινωνία</a>
     </div>
 
@@ -264,7 +301,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200 });
+        AOS.init({ duration: 1000, once: true });
 
         function setupMagicBoxes() {
             const boxes = document.querySelectorAll('.magic-box');
@@ -275,7 +312,7 @@
                     images[current].classList.remove('active');
                     current = (current + 1) % images.length;
                     images[current].classList.add('active');
-                }, 3500 + Math.random() * 1500);
+                }, 4000 + Math.random() * 2000);
             });
         }
         setupMagicBoxes();
@@ -287,7 +324,7 @@
                 navHome: "Αρχική", navPhotos: "Φωτογραφίες", navHistory: "Ιστορία", navContact: "Επικοινωνία",
                 staffH: "Η Οικογένεια του Vagelis Bar",
                 staffP: "Το χαμόγελο και η εξυπηρέτηση της ομάδας μας είναι αυτό που μας κάνει να ξεχωρίζουμε.",
-                bossH: "Ο Βαγγέλης & η Φαούστα",
+                bossH: "Ο Βαγγέλης & η Φάουστα",
                 bossP: "Η ψυχή του μαγαζιού. Με αγάπη για τη φιλοξενία, σας καλωσορίζουν στο δικό τους στέκι.",
                 cta: "Επικοινωνία"
             },
@@ -316,22 +353,11 @@
             document.getElementById('boss-p').innerText = content[lang].bossP;
             document.getElementById('cta-btn').innerText = content[lang].cta;
         }
-        // Λειτουργία για το Hamburger Menu
+
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.querySelector('.nav-links');
-
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
-            
-            mobileMenu.classList.toggle('is-active');
-        });
-
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
         });
     </script>
 </body>

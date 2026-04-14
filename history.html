@@ -6,145 +6,201 @@
     <title>Vagelis Bar | Η Ιστορία μας</title>
     <link rel="icon" type="image/png" href="images/favico.png?v=1">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #002b5b;
-            --accent: #f39c12;
-            --text: #ffffff;
-            --bg: #0a192f;
+            --primary: #001a33;
+            --accent: #7b7674;
+            --accent-glow: rgba(230, 126, 34, 0.4);
+            --text: #f8f9fa;
+            --bg-dark: #000b1a;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            background: radial-gradient(circle at center, #002b5b, #000b1a);
             color: var(--text);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Navbar */
+        /* --- Navigation --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            padding: 20px 8%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             position: fixed;
-            top: 0; width: 90%; z-index: 1000;
+            top: 0; width: 100%; z-index: 2000;
+            border-bottom: 1px solid var(--glass-border);
         }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--accent); }
-        
-        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
-        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
 
-        /* History Header */
+        .logo { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-weight: 400; 
+            font-size: 0.95rem;
+            transition: 0.4s; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--accent); transition: 0.4s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .lang-switch { 
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 6px 15px; 
+            border-radius: 30px; 
+        }
+
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+
+        /* --- History Header --- */
         .history-hero {
-            height: 40vh;
-            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('images/new1.png');
+            height: 60vh;
+            background: linear-gradient(rgba(0,11,26,0.6), rgba(0,11,26,0.9)), url('images/new1.png');
             background-size: cover;
             background-position: center;
+            background-attachment: fixed;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            margin-top: 60px;
+            padding-top: 60px;
         }
 
-        .history-hero h1 { font-size: 3.5rem; color: var(--accent); margin: 0; }
+        .history-hero h1 { 
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 8vw, 5.5rem); 
+            font-style: italic;
+            color: white; 
+            margin: 0; 
+            text-shadow: 2px 2px 30px rgba(0,0,0,0.6);
+        }
 
-        /* History Sections */
+        /* --- History Sections --- */
         .history-section {
-            padding: 80px 10%;
+            padding: 100px 10%;
             display: flex;
             align-items: center;
-            gap: 50px;
+            gap: 70px;
         }
 
-        .history-section:nth-child(even) { flex-direction: row-reverse; background: rgba(255,255,255,0.03); }
+        .history-section:nth-child(even) { 
+            flex-direction: row-reverse; 
+            background: rgba(255,255,255,0.02); 
+        }
 
-        .history-text { flex: 1; }
-        .history-text h2 { color: var(--accent); font-size: 2.5rem; margin-bottom: 20px; }
-        .history-text p { font-size: 1.2rem; line-height: 1.8; color: #ccc; }
+        .history-text { flex: 1.2; }
+        .history-text h2 { 
+            font-family: 'Playfair Display', serif;
+            color: var(--accent); 
+            font-size: 3rem; 
+            margin-bottom: 25px; 
+        }
+        .history-text p { 
+            font-size: 1.2rem; 
+            font-weight: 300;
+            line-height: 1.9; 
+            color: rgba(255,255,255,0.85); 
+        }
 
-        .history-images { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .history-images img { width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: 0.4s; }
-        .history-images img:hover { transform: scale(1.05); }
+        .history-images { 
+            flex: 1; 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 20px; 
+        }
+        .history-images img { 
+            width: 100%; 
+            aspect-ratio: 4/5;
+            object-fit: cover;
+            border-radius: 20px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5); 
+            border: 1px solid var(--glass-border);
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        .history-images img:hover { transform: translateY(-10px) rotate(2deg); border-color: var(--accent); }
 
-        /* CTA & Footer */
-        .bottom-section { text-align: center; padding: 60px 0; }
+        /* --- CTA & Footer --- */
+        .bottom-section { text-align: center; padding: 100px 0; background: var(--bg-dark); }
         .cta-btn {
             display: inline-block;
             background: var(--accent);
             color: white;
             text-decoration: none;
-            padding: 15px 40px;
-            border-radius: 30px;
+            padding: 18px 50px;
+            border-radius: 50px;
             font-weight: bold;
             text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: 2px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
         }
-        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3); }
+        .cta-btn:hover { transform: translateY(-5px); box-shadow: 0 15px 30px var(--accent-glow); }
 
         footer {
-            padding: 30px;
+            padding: 40px;
             text-align: center;
-            background: rgba(0,0,0,0.4);
+            background: rgba(0,0,0,0.5);
             font-size: 0.9rem;
-            color: #888;
+            color: rgba(255,255,255,0.5);
+            border-top: 1px solid var(--glass-border);
         }
 
+        /* --- Mobile Styles --- */
         @media screen and (max-width: 900px) {
-            .history-section, .history-section:nth-child(even) { flex-direction: column; padding: 40px 5%; }
-            .history-hero h1 { font-size: 2.5rem; }
-        }
-        /* Hamburger Icon Style */
-        .menu-toggle {
-            display: none; 
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            transition: 0.3s;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            nav { width: 100%; padding: 15px 20px; box-sizing: border-box; }
-            
-            .menu-toggle { display: flex; order: 2; } 
-            .logo { order: 1; }
-            .lang-switch { order: 3; font-size: 0.8rem; }
-
-            .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                padding: 20px 0;
+            .history-section, .history-section:nth-child(even) { 
+                flex-direction: column; 
+                padding: 60px 8%; 
+                gap: 40px;
                 text-align: center;
             }
+            .history-hero h1 { font-size: 3rem; }
+            .history-text h2 { font-size: 2.2rem; }
+            .history-images { width: 100%; }
+        }
 
-            .nav-links.active {
-                display: flex; 
+        @media (max-width: 768px) {
+            nav { padding: 15px 5%; }
+            .nav-links {
+                display: none; flex-direction: column;
+                position: absolute; top: 70px; left: 0; width: 100%;
+                background: rgba(0, 11, 26, 0.98); padding: 30px 0;
             }
-
-            .nav-links a {
-                margin: 15px 0;
-                font-size: 1.2rem;
-                display: block;
-            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 15px 0; font-size: 1.1rem; }
+            .menu-toggle { display: flex; order: 3; flex-direction: column; gap: 5px; cursor: pointer; }
+            .bar { width: 25px; height: 2px; background: white; }
         }
     </style>
 </head>
@@ -153,26 +209,27 @@
     <nav>
         <div class="logo">VAGELIS BAR</div>
         
+        <div class="nav-links">
+            <a href="index.html" id="nav-home">Αρχική</a>
+            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
+            <a href="history.html" class="active" id="nav-history">Ιστορία</a>
+            <a href="contact.html" id="nav-contact">Επικοινωνία</a>
+        </div>
+
+        <div class="lang-switch">
+            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
+            <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+
         <div class="menu-toggle" id="mobile-menu">
             <span class="bar"></span>
             <span class="bar"></span>
             <span class="bar"></span>
         </div>
-
-        <div class="nav-links">
-            <a href="index.html" id="nav-home">Αρχική</a>
-            <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
-            <a href="history.html" id="nav-history">Ιστορία</a>
-            <a href="contact.html" class="active" id="nav-contact">Επικοινωνία</a>
-        </div>
-        <div class="lang-switch">
-            <button class="lang-btn" onclick="setLang('el')">GR</button> | 
-            <button class="lang-btn" onclick="setLang('en')">EN</button>
-        </div>
-    </nav>  
+    </nav>
 
     <header class="history-hero">
-        <h1 id="hero-title" data-aos="fade-down">Η Ιστορία μας</h1>
+        <h1 id="hero-title" data-aos="zoom-out">Η Ιστορία μας</h1>
     </header>
 
     <section class="history-section">
@@ -181,23 +238,23 @@
             <p id="start-desc">Όλα ξεκίνησαν το 1978 από ένα όνειρο του Βαγγέλη. Σε μια εποχή που το Κοκκάρι ήταν ένα ήσυχο ψαροχώρι, εκείνος δημιούργησε έναν χώρο φιλοξενίας που έμελλε να γίνει σημείο αναφοράς. Με μεράκι και αγάπη για τον τόπο, η "πρώτη πέτρα" μπήκε για να δημιουργηθούν αναμνήσεις που κρατάνε δεκαετίες.</p>
         </div>
         <div class="history-images" data-aos="zoom-in">
-            <img src="images/old1.png" alt="Old Vagelis Bar 1">
-            <img src="images/old2.png" alt="Old Vagelis Bar 2">
+            <img src="images/old1.png" alt="Vagelis Bar Legacy 1">
+            <img src="images/old2.png" alt="Vagelis Bar Legacy 2">
         </div>
     </section>
 
     <section class="history-section">
         <div class="history-text" data-aos="fade-left">
             <h2 id="today-title">Το Σήμερα</h2>
-            <p id="today-desc">Σήμερα, το Vagelis Bar συνεχίζει την παράδοση της οικογένειας, συνδυάζοντας την κλασική αισθητική με τις σύγχρονες γεύσεις. Ο Βαγγέλης και η Φαούστα σας υποδέχονται καθημερινά στο πιο εμβληματικό σημείο στο Κοκκάρι, προσφέροντας την ίδια ζεστή φιλοξενία με το  καλύτερο χαμόγελο της Σάμου.</p>
+            <p id="today-desc">Σήμερα, το Vagelis Bar συνεχίζει την παράδοση της οικογένειας, συνδυάζοντας την κλασική αισθητική με τις σύγχρονες γεύσεις. Ο Βαγγέλης και η Φαούστα σας υποδέχονται καθημερινά στο πιο εμβληματικό σημείο στο Κοκκάρι, προσφέροντας την ίδια ζεστή φιλοξενία και το πιο ειλικρινές χαμόγελο της Σάμου.</p>
         </div>
         <div class="history-images" data-aos="zoom-in">
-            <img src="images/new1.png" alt="New Vagelis Bar 1">
-            <img src="images/new2.png" alt="New Vagelis Bar 2">
+            <img src="images/new1.png" alt="Modern Vagelis Bar 1">
+            <img src="images/new2.png" alt="Modern Vagelis Bar 2">
         </div>
     </section>
 
-    <div class="bottom-section">
+    <div class="bottom-section" data-aos="fade-up">
         <a href="contact.html" class="cta-btn" id="cta-btn">Επικοινωνία</a>
     </div>
 
@@ -207,7 +264,7 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200, once: true });
+        AOS.init({ duration: 1000, once: true });
 
         const content = {
             el: {
@@ -216,7 +273,7 @@
                 startTitle: "Πώς Ξεκινήσαμε",
                 startDesc: "Όλα ξεκίνησαν το 1978 από ένα όνειρο του Βαγγέλη. Σε μια εποχή που το Κοκκάρι ήταν ένα ήσυχο ψαροχώρι, εκείνος δημιούργησε έναν χώρο φιλοξενίας που έμελλε να γίνει σημείο αναφοράς. Με μεράκι και αγάπη για τον τόπο, η 'πρώτη πέτρα' μπήκε για να δημιουργηθούν αναμνήσεις που κρατάνε δεκαετίες.",
                 todayTitle: "Το Σήμερα",
-                todayDesc: "Σήμερα, το Vagelis Bar συνεχίζει την παράδοση της οικογένειας, συνδυάζοντας την κλασική αισθητική με τις σύγχρονες γεύσεις. Ο Βαγγέλης και η Φαούστα σας υποδέχονται καθημερινά στο πιο εμβληματικό σημείο στο Κοκκάρι, προσφέροντας την ίδια ζεστή φιλοξενία και  με το  καλύτερο χαμόγελο.",
+                todayDesc: "Σήμερα, το Vagelis Bar συνεχίζει την παράδοση της οικογένειας, συνδυάζοντας την κλασική αισθητική με τις σύγχρονες γεύσεις. Ο Βαγγέλης και η Φαούστα σας υποδέχονται καθημερινά στο πιο εμβληματικό σημείο στο Κοκκάρι, προσφέροντας την ίδια ζεστή φιλοξενία και το πιο ειλικρινές χαμόγελο.",
                 cta: "Επικοινωνία"
             },
             en: {
@@ -225,7 +282,7 @@
                 startTitle: "How It Started",
                 startDesc: "It all started in 1978 from Vagelis's dream. At a time when Kokkari was a quiet fishing village, he created a place of hospitality that was destined to become a landmark. With passion and love for the land, the 'first stone' was laid to create memories that last for decades.",
                 todayTitle: "Today",
-                todayDesc: "Today, Vagelis Bar continues the family tradition, combining classic aesthetics with modern flavors. Vagelis and Fausta welcome you daily to the most iconic spot in Kokkari, offering the same warm hospitality and the best smile inSamos's .",
+                todayDesc: "Today, Vagelis Bar continues the family tradition, combining classic aesthetics with modern flavors. Vagelis and Fausta welcome you daily to the most iconic spot in Kokkari, offering the same warm hospitality and the most sincere smile in Samos.",
                 cta: "Contact Us"
             }
         };
@@ -248,16 +305,6 @@
 
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
-            
-            mobileMenu.classList.toggle('is-active');
-        });
-
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
         });
     </script>
 </body>

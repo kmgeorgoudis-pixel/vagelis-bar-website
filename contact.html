@@ -6,208 +6,260 @@
     <title>Vagelis Bar | Επικοινωνία</title>
     <link rel="icon" type="image/png" href="images/favico.png?v=1">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #002b5b;
-            --accent: #f39c12;
-            --text: #ffffff;
-            --bg: #050a14;
+            --primary: #001a33;
+            --accent: #7b7674;
+            --accent-glow: rgba(230, 126, 34, 0.4);
+            --text: #f8f9fa;
+            --bg-dark: #000b1a;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.15);
         }
+
+        * { box-sizing: border-box; }
 
         body {
             margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background-color: var(--bg);
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            background: radial-gradient(circle at center, #002b5b, #000b1a);
             color: var(--text);
             overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* Navbar */
+        /* --- Navigation --- */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 5%;
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
+            padding: 20px 8%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
             position: fixed;
-            top: 0; width: 90%; z-index: 1000;
+            top: 0; width: 100%; z-index: 2000;
+            border-bottom: 1px solid var(--glass-border);
         }
-        nav a { color: white; text-decoration: none; margin: 0 15px; font-weight: bold; transition: 0.3s; }
-        nav a:hover, nav a.active { color: var(--accent); }
-        .lang-switch { border: 1px solid var(--accent); padding: 5px 10px; border-radius: 20px; }
-        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; }
 
+        .logo { 
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem; 
+            font-weight: bold; 
+            letter-spacing: 3px;
+            color: var(--accent);
+            text-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .nav-links a { 
+            color: white; 
+            text-decoration: none; 
+            margin: 0 20px; 
+            font-weight: 400; 
+            font-size: 0.95rem;
+            transition: 0.4s; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background-color: var(--accent); transition: 0.4s;
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+        .lang-switch { 
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 6px 15px; 
+            border-radius: 30px; 
+        }
+
+        .lang-btn { background: none; border: none; color: white; cursor: pointer; font-weight: bold; font-size: 0.8rem; }
+
+        /* --- Contact Layout --- */
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            padding: 150px 10% 50px;
+            gap: 60px;
+            padding: 180px 10% 80px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        /* Form Style */
-        .contact-form {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
+        /* --- Info Section --- */
+        .info-box h2 { 
+            font-family: 'Playfair Display', serif;
+            color: var(--accent); 
+            font-size: clamp(2.5rem, 5vw, 3.5rem); 
+            margin-top: 0; 
+            margin-bottom: 40px;
+        }
+
+        .info-item { margin-bottom: 30px; }
+        .info-item h4 { 
+            margin: 0 0 5px 0; 
+            color: var(--accent); 
+            text-transform: uppercase; 
+            letter-spacing: 2px; 
+            font-size: 0.9rem;
+        }
+        .info-item p, .info-item a { 
+            font-size: 1.2rem; 
+            color: rgba(255,255,255,0.8); 
+            text-decoration: none; 
+            transition: 0.3s; 
+        }
+        .info-item a:hover { color: var(--accent); }
+
+        .map-wrapper {
+            margin-top: 40px;
             border-radius: 20px;
-            border: 1px solid rgba(243, 156, 18, 0.2);
-            backdrop-filter: blur(5px);
-            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+        }
+
+        /* --- Form Style --- */
+        .contact-form {
+            background: var(--glass);
+            padding: 50px;
+            border-radius: 25px;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
         .contact-form h3 {
             color: var(--accent);
             margin-top: 0;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 20px;
-            border-left: 4px solid var(--accent);
+            margin-bottom: 30px;
+            border-left: 3px solid var(--accent);
             padding-left: 15px;
         }
 
         .contact-form input, .contact-form textarea {
             width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            background: rgba(0,0,0,0.3);
-            border: 1px solid #444;
+            padding: 15px;
+            margin: 12px 0;
+            background: rgba(0,0,0,0.2);
+            border: 1px solid var(--glass-border);
             color: white;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 1rem;
-            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+            transition: 0.3s;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(0,0,0,0.4);
         }
 
         .submit-btn {
             background: var(--accent);
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 8px;
+            padding: 18px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
             text-transform: uppercase;
-            transition: 0.3s;
+            letter-spacing: 2px;
+            transition: 0.4s;
             width: 100%;
-            margin-top: 10px;
+            margin-top: 15px;
+            box-shadow: 0 10px 20px rgba(230, 126, 34, 0.2);
         }
 
-        .submit-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(243, 156, 18, 0.4); }
-
-        /* Info Style */
-        .info-box h2 { color: var(--accent); font-size: 3rem; margin-top: 0; }
-        .info-item { margin-bottom: 25px; }
-        .info-item h4 { margin: 0; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
-        .info-item p, .info-item a { font-size: 1.2rem; color: #ccc; text-decoration: none; transition: 0.3s; }
-        .info-item a:hover { color: var(--accent); }
-
-        /* Map Style */
-        .map-wrapper {
-            margin-top: 30px;
-            border-radius: 15px;
-            overflow: hidden;
-            border: 1px solid rgba(243, 156, 18, 0.3);
+        .submit-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 15px 30px var(--accent-glow); 
+            background: #f39c12;
         }
 
-        /* Reviews Section */
+        /* --- Reviews Section --- */
         .reviews {
-            padding: 80px 10%;
+            padding: 100px 10%;
             text-align: center;
             background: rgba(255,255,255,0.02);
         }
 
+        .reviews h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 50px; }
+
         .review-cards {
             display: flex;
-            gap: 20px;
+            gap: 30px;
             justify-content: center;
-            margin-top: 40px;
             flex-wrap: wrap;
         }
 
         .review-card {
-            background: rgba(255,255,255,0.05);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            width: 320px;
-            border: 1px solid rgba(255,255,255,0.1);
-            transition: 0.3s;
+            background: var(--glass);
+            padding: 40px;
+            border-radius: 20px;
+            width: 350px;
+            border: 1px solid var(--glass-border);
+            transition: 0.4s;
         }
-        .review-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); }
-
-        .stars { color: #f1c40f; margin-bottom: 10px; }
+        .review-card:hover { transform: translateY(-10px); border-color: var(--accent); }
+        .stars { color: #f1c40f; margin-bottom: 15px; font-size: 1.2rem; }
+        .review-card p { font-style: italic; color: rgba(255,255,255,0.9); font-size: 1.05rem; }
 
         .google-link {
             display: inline-block;
-            margin-top: 40px;
-            color: var(--accent);
+            margin-top: 50px;
+            color: white;
             text-decoration: none;
             font-weight: bold;
-            padding: 10px 20px;
+            padding: 15px 35px;
             border: 1px solid var(--accent);
-            border-radius: 25px;
-            transition: 0.3s;
+            border-radius: 50px;
+            transition: 0.4s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .google-link:hover { background: var(--accent); color: white; }
+        .google-link:hover { background: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
 
-        /* Footer */
+        /* --- Footer --- */
         footer {
-            padding: 40px;
+            padding: 50px;
             text-align: center;
-            background: #000;
-            color: #777;
+            background: rgba(0,0,0,0.5);
+            color: rgba(255,255,255,0.4);
             font-size: 0.9rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 900px) {
+            .contact-container { grid-template-columns: 1fr; padding-top: 130px; }
+            .info-box { text-align: center; }
+            .contact-form { padding: 30px; }
         }
 
         @media (max-width: 768px) {
-            .contact-container { grid-template-columns: 1fr; padding-top: 120px; }
-            .info-box h2 { font-size: 2.2rem; }
-        }
-        /* Hamburger Icon Style */
-        .menu-toggle {
-            display: none; 
-            flex-direction: column;
-            cursor: pointer;
-            gap: 5px;
-        }
-
-        .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            transition: 0.3s;
-        }
-
-        /* Mobile Styles */
-        @media (max-width: 768px) {
-            nav { width: 100%; padding: 15px 20px; box-sizing: border-box; }
-            
-            .menu-toggle { display: flex; order: 2; } 
-            .logo { order: 1; }
-            .lang-switch { order: 3; font-size: 0.8rem; }
-
+            nav { padding: 15px 5%; }
             .nav-links {
-                display: none; 
-                flex-direction: column;
-                position: absolute;
-                top: 60px;
-                left: 0;
-                width: 100%;
-                background: rgba(0, 0, 0, 0.95);
-                padding: 20px 0;
-                text-align: center;
+                display: none; flex-direction: column;
+                position: absolute; top: 70px; left: 0; width: 100%;
+                background: rgba(0, 11, 26, 0.98); padding: 30px 0;
             }
-
-            .nav-links.active {
-                display: flex; 
-            }
-
-            .nav-links a {
-                margin: 15px 0;
-                font-size: 1.2rem;
-                display: block;
-            }
+            .nav-links.active { display: flex; }
+            .nav-links a { margin: 15px 0; }
+            .menu-toggle { display: flex; order: 3; flex-direction: column; gap: 5px; cursor: pointer; }
+            .bar { width: 25px; height: 2px; background: white; }
         }
     </style>
 </head>
@@ -216,21 +268,22 @@
     <nav>
         <div class="logo">VAGELIS BAR</div>
         
-        <div class="menu-toggle" id="mobile-menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </div>
-
         <div class="nav-links">
             <a href="index.html" id="nav-home">Αρχική</a>
             <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
             <a href="history.html" id="nav-history">Ιστορία</a>
             <a href="contact.html" class="active" id="nav-contact">Επικοινωνία</a>
         </div>
+
         <div class="lang-switch">
             <button class="lang-btn" onclick="setLang('el')">GR</button> | 
             <button class="lang-btn" onclick="setLang('en')">EN</button>
+        </div>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
         </div>
     </nav>
 
@@ -255,7 +308,7 @@
             </div>
 
             <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2414.3815763167418!2d26.890614274746532!3d37.77883677198433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bc1678c4bae449%3A0x8ff7e419ee59bee0!2sVagelis%20Bar!5e1!3m2!1sel!2sgr!4v1776116927244!5m2!1sel!2sgr" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2414.3815763167418!2d26.890614274746532!3d37.77883677198433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14bc1678c4bae449%3A0x8ff7e419ee59bee0!2sVagelis%20Bar!5e1!3m2!1sel!2sgr!4v1776180381058!5m2!1sel!2sgr" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
 
@@ -269,12 +322,14 @@
                 <input type="email" name="email" id="form-email" placeholder="Το Email σας" required>
                 <input type="text" name="subject" id="form-subject" placeholder="Θέμα">
                 <textarea name="message" id="form-msg" rows="5" placeholder="Το Μήνυμά σας" required></textarea>
-                <div style="display: flex; align-items: flex-start; gap: 10px; margin: 15px 0; text-align: left;">
+                
+                <div style="display: flex; align-items: flex-start; gap: 12px; margin: 20px 0;">
                     <input type="checkbox" id="privacy-check" required style="width: auto; margin-top: 5px;">
-                    <label for="privacy-check" style="font-size: 0.85rem; color: #ccc;">
-                        Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων (όνομα, email) για την επικοινωνία με το Vagelis Bar./ I agree to the processing of my personal data (name, email) for the purpose of communicating with Vagelis Bar.
+                    <label for="privacy-check" style="font-size: 0.8rem; color: rgba(255,255,255,0.6); cursor: pointer;">
+                        Συμφωνώ με την επεξεργασία των προσωπικών μου δεδομένων για την επικοινωνία με το Vagelis Bar. / I agree to the processing of my personal data for communication purposes.
                     </label>
                 </div>
+                
                 <button type="submit" class="submit-btn" id="form-btn">Αποστολή Μηνύματος</button>
             </form>
         </div>
@@ -286,12 +341,12 @@
             <div class="review-card" data-aos="zoom-in">
                 <div class="stars">★★★★★</div>
                 <p>"Το καλύτερο σημείο στο Κοκκάρι! Τα cocktails είναι έργα τέχνης και η θέα στην πλατεία δεν περιγράφεται με λόγια."</p>
-                <strong>- Marco S.</strong>
+                <strong style="display:block; margin-top:15px; color:var(--accent);">- Marco S.</strong>
             </div>
             <div class="review-card" data-aos="zoom-in" data-aos-delay="200">
                 <div class="stars">★★★★★</div>
                 <p>"Αυθεντική φιλοξενία. Ο Βαγγέλης και το προσωπικό σε κάνουν να νιώθεις σαν το σπίτι σου!"</p>
-                <strong>- Ελένη Κ.</strong>
+                <strong style="display:block; margin-top:15px; color:var(--accent);">- Ελένη Κ.</strong>
             </div>
         </div>
         <a href="https://share.google/jNQHpx3AU3JJ70Ujx" target="_blank" class="google-link" id="google-btn">Δείτε όλες τις κριτικές στο Google</a>
@@ -299,12 +354,12 @@
 
     <footer>
         Website designed and developed with ❤️ by <b>Konstantinos Georgoudis</b><br>
-        <a href="privacy.html" style="color: #777; text-decoration: none; font-size: 0.8rem; margin-top: 10px; display: inline-block;">Πολιτική Απορρήτου / Privacy Policy</a>
+        <a href="privacy.html" style="color: rgba(255,255,255,0.3); text-decoration: none; font-size: 0.8rem; margin-top: 15px; display: inline-block;">Πολιτική Απορρήτου / Privacy Policy</a>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 1200 });
+        AOS.init({ duration: 1000, once: true });
 
         const langData = {
             el: {
@@ -354,13 +409,10 @@
         };
 
         function setLang(lang) {
-            // Navbar
             document.getElementById('nav-home').innerText = langData[lang].navHome;
             document.getElementById('nav-photos').innerText = langData[lang].navPhotos;
             document.getElementById('nav-history').innerText = langData[lang].navHistory;
             document.getElementById('nav-contact').innerText = langData[lang].navContact;
-
-            // Content
             document.getElementById('contact-title').innerText = langData[lang].title;
             document.getElementById('info-addr').innerText = langData[lang].addr;
             document.querySelector('.info-item p').innerText = langData[lang].addrFull;
@@ -368,37 +420,22 @@
             document.getElementById('info-email').innerText = langData[lang].email;
             document.getElementById('info-hours').innerText = langData[lang].hours;
             document.getElementById('hours-text').innerText = langData[lang].hoursText;
-            
-            
             document.getElementById('form-header').innerText = langData[lang].fHeader;
             document.getElementById('form-name').placeholder = langData[lang].fName;
             document.getElementById('form-email').placeholder = langData[lang].fEmail;
             document.getElementById('form-subject').placeholder = langData[lang].fSub;
             document.getElementById('form-msg').placeholder = langData[lang].fMsg;
             document.getElementById('form-btn').innerText = langData[lang].fBtn;
-            
-            
             document.getElementById('reviews-title').innerText = langData[lang].revTitle;
             document.getElementById('google-btn').innerText = langData[lang].gBtn;
-            
             const reviewTexts = document.querySelectorAll('.review-card p');
             langData[lang].reviews.forEach((text, i) => reviewTexts[i].innerText = text);
         }
         
         const mobileMenu = document.getElementById('mobile-menu');
         const navLinks = document.querySelector('.nav-links');
-
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            
-            
-            mobileMenu.classList.toggle('is-active');
-        });
-
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
         });
     </script>
 </body>
