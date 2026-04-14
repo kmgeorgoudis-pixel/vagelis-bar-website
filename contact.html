@@ -164,12 +164,64 @@
             .contact-container { grid-template-columns: 1fr; padding-top: 120px; }
             .info-box h2 { font-size: 2.2rem; }
         }
+        /* Hamburger Icon Style */
+        .menu-toggle {
+            display: none; 
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            nav { width: 100%; padding: 15px 20px; box-sizing: border-box; }
+            
+            .menu-toggle { display: flex; order: 2; } 
+            .logo { order: 1; }
+            .lang-switch { order: 3; font-size: 0.8rem; }
+
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex; 
+            }
+
+            .nav-links a {
+                margin: 15px 0;
+                font-size: 1.2rem;
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">VAGELIS BAR</div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
         <div class="nav-links">
             <a href="index.html" id="nav-home">Αρχική</a>
             <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
@@ -316,7 +368,7 @@
             document.getElementById('info-hours').innerText = langData[lang].hours;
             document.getElementById('hours-text').innerText = langData[lang].hoursText;
             
-            // Form
+            
             document.getElementById('form-header').innerText = langData[lang].fHeader;
             document.getElementById('form-name').placeholder = langData[lang].fName;
             document.getElementById('form-email').placeholder = langData[lang].fEmail;
@@ -324,13 +376,29 @@
             document.getElementById('form-msg').placeholder = langData[lang].fMsg;
             document.getElementById('form-btn').innerText = langData[lang].fBtn;
             
-            // Reviews
+            
             document.getElementById('reviews-title').innerText = langData[lang].revTitle;
             document.getElementById('google-btn').innerText = langData[lang].gBtn;
             
             const reviewTexts = document.querySelectorAll('.review-card p');
             langData[lang].reviews.forEach((text, i) => reviewTexts[i].innerText = text);
         }
+        
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            
+            mobileMenu.classList.toggle('is-active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>

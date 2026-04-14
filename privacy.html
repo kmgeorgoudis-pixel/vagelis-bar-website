@@ -58,17 +58,69 @@
             font-size: 0.9rem;
             margin-top: 50px;
         }
+        /* Hamburger Icon Style */
+        .menu-toggle {
+            display: none; 
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 768px) {
+            nav { width: 100%; padding: 15px 20px; box-sizing: border-box; }
+            
+            .menu-toggle { display: flex; order: 2; } 
+            .logo { order: 1; }
+            .lang-switch { order: 3; font-size: 0.8rem; }
+
+            .nav-links {
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background: rgba(0, 0, 0, 0.95);
+                padding: 20px 0;
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex; 
+            }
+
+            .nav-links a {
+                margin: 15px 0;
+                font-size: 1.2rem;
+                display: block;
+            }
+        }
     </style>
 </head>
 <body>
 
     <nav>
         <div class="logo">VAGELIS BAR</div>
+        
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+
         <div class="nav-links">
             <a href="index.html" id="nav-home">Αρχική</a>
             <a href="photos.html" id="nav-photos">Φωτογραφίες</a>
             <a href="history.html" id="nav-history">Ιστορία</a>
-            <a href="contact.html" id="nav-contact">Επικοινωνία</a>
+            <a href="contact.html" class="active" id="nav-contact">Επικοινωνία</a>
         </div>
         <div class="lang-switch">
             <button class="lang-btn" onclick="setLang('el')">GR</button> | 
@@ -147,6 +199,23 @@
 
         
         setLang('el');
+        
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            
+            
+            mobileMenu.classList.toggle('is-active');
+        });
+
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
     </script>
 </body>
 </html>
